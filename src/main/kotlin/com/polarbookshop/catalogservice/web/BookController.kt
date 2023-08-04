@@ -2,6 +2,7 @@ package com.polarbookshop.catalogservice.web
 
 import com.polarbookshop.catalogservice.domain.Book
 import com.polarbookshop.catalogservice.domain.BookService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -29,7 +30,7 @@ class BookController(
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  fun post(@RequestBody book: Book): Book =
+  fun post(@Valid @RequestBody book: Book): Book =
     bookService.addBookToCatalog(book)
 
   @DeleteMapping("{isbn}")
@@ -38,6 +39,6 @@ class BookController(
     bookService.removeBookFromCatalog(isbn)
 
   @PutMapping("{isbn}")
-  fun put(@PathVariable("isbn") isbn: String, @RequestBody book: Book): Book =
+  fun put(@PathVariable("isbn") isbn: String, @Valid @RequestBody book: Book): Book =
     bookService.editBookDetails(isbn, book)
 }
