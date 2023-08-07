@@ -25,6 +25,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // reactive
   //implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
