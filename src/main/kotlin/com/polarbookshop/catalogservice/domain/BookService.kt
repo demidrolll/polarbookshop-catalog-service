@@ -28,15 +28,11 @@ class BookService(
   fun editBookDetails(isbn: String, book: Book): Book =
     bookRepository.findByIsbn(isbn)
       .map { existBook ->
-        val updated = Book(
-          id = existBook.id,
-          isbn = existBook.isbn,
+        val updated = existBook.copy(
           title = book.title,
           author = book.author,
           price = book.price,
-          version = existBook.version,
-          createdDate = existBook.createdDate,
-          lastModifiedDate = existBook.lastModifiedDate,
+          publisher = book.publisher,
         )
         bookRepository.save(updated)
       }
