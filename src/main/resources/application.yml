@@ -35,10 +35,6 @@ spring:
       connection-timeout: 3000
       maximum-pool-size: 5
 
-  sql:
-    init:
-      mode: always
-
 management:
   endpoints:
     web:

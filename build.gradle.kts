@@ -23,6 +23,8 @@ extra["springCloudVersion"] = "2022.0.4"
 extra["testcontainersVersion"] = "1.19.0"
 
 dependencies {
+  implementation("org.flywaydb:flyway-core")
+
   implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
   runtimeOnly("org.postgresql:postgresql")
 
