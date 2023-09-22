@@ -15,8 +15,18 @@ class BookDataLoader(
 
   @EventListener(ApplicationReadyEvent::class)
   fun loadBookTestData() {
-    val book1 = Book("1234567891", "Northern Lights", "Lyra Silverstar", 9.90);
-    val book2 = Book("1234567892", "Polar Journey", "Iorek Polarson", 12.90);
+    val book1 = Book(
+      isbn = "1234567891",
+      title = "Northern Lights",
+      author = "Lyra Silverstar",
+      price = 9.90
+    )
+    val book2 = Book(
+      isbn = "1234567892",
+      title = "Polar Journey",
+      author = "Iorek Polarson",
+      price = 12.90
+    )
     bookRepository.save(book1)
     bookRepository.save(book2)
   }

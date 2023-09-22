@@ -22,12 +22,17 @@ repositories {
 extra["springCloudVersion"] = "2022.0.4"
 
 dependencies {
+  implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+  runtimeOnly("org.postgresql:postgresql")
+
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.retry:spring-retry")
   implementation("org.springframework.cloud:spring-cloud-starter-config")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-validation")
+
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 

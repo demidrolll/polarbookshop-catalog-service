@@ -29,10 +29,14 @@ class BookService(
     bookRepository.findByIsbn(isbn)
       .map { existBook ->
         val updated = Book(
+          id = existBook.id,
           isbn = existBook.isbn,
           title = book.title,
           author = book.author,
-          price = book.price
+          price = book.price,
+          version = existBook.version,
+          createdDate = existBook.createdDate,
+          lastModifiedDate = existBook.lastModifiedDate,
         )
         bookRepository.save(updated)
       }
