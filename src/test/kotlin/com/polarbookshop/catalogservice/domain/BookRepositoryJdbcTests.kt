@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.context.annotation.Import
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.ActiveProfiles
 
 @DataJdbcTest
@@ -32,5 +33,34 @@ class BookRepositoryJdbcTests(
 
     assertThat(actualBook).isPresent()
     assertThat(actualBook.get().isbn).isEqualTo(book.isbn)
+  }
+
+  @Test
+  fun `when create book not authenticated then no audit metadata`() {
+    val bookToCreate = Book(
+      isbn = "1232343456",
+      title = "Title",
+      author = "Author",
+      price = 12.90,
+      publisher = "Polarsophia"
+    )
+    val createdBook = bookRepository.save(bookToCreate)
+    assertThat(createdBook.createdBy).isNull()
+    assertThat(createdBook.lastModifiedBy).isNull()
+  }
+
+  @Test
+  @WithMockUser("john")
+  fun `when create book authenticated then audit metadata`() {
+    val bookToCreate = Book(
+      isbn = "1232343456",
+      title = "Title",
+      author = "Author",
+      price = 12.90,
+      publisher = "Polarsophia"
+    )
+    val createdBook = bookRepository.save(bookToCreate)
+    assertThat(createdBook.createdBy).isEqualTo("john")
+    assertThat(createdBook.lastModifiedBy).isEqualTo("john")
   }
 }
