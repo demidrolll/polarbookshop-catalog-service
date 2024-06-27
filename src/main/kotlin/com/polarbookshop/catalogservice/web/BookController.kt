@@ -3,6 +3,7 @@ package com.polarbookshop.catalogservice.web
 import com.polarbookshop.catalogservice.domain.Book
 import com.polarbookshop.catalogservice.domain.BookService
 import jakarta.validation.Valid
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,8 +22,10 @@ class BookController(
 ) {
 
   @GetMapping
-  fun get(): Iterable<Book> =
-    bookService.viewBookList()
+  fun get(): Iterable<Book> {
+    log.info("Fetching the list of books in the catalog")
+    return bookService.viewBookList()
+  }
 
   @GetMapping("{isbn}")
   fun getByIsbn(@PathVariable("isbn") isbn: String) =
@@ -41,4 +44,8 @@ class BookController(
   @PutMapping("{isbn}")
   fun put(@PathVariable("isbn") isbn: String, @Valid @RequestBody book: Book): Book =
     bookService.editBookDetails(isbn, book)
+
+  companion object {
+    private val log = LoggerFactory.getLogger(BookController::class.java)
+  }
 }
