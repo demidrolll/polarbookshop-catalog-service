@@ -28,6 +28,7 @@ dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
   runtimeOnly("org.postgresql:postgresql")
+  runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.retry:spring-retry")
