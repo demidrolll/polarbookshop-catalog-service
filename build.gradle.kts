@@ -79,3 +79,8 @@ tasks.bootBuildImage {
     }
   }
 }
+
+springBoot {
+  buildInfo()
+}
+
